@@ -1,5 +1,6 @@
 * {
   font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
 }
 body {
   display: flex;
@@ -25,7 +26,6 @@ body {
   background-color: #eeeeee;
   order: -1;
 }
-
 .title-list {
   display: flex;
   list-style: none;
@@ -45,16 +45,17 @@ body {
   align-items: center;
 }
 .content-container {
+  width: 1200px;
+  flex: 1;
   display: flex;
   flex-wrap: wrap;
-  flex: 1;
 }
 .card {
   display: flex;
   background-color: rgb(139, 152, 168);
-  flex: 1 200px;
+  flex: 1 45%;
   height: 20vh;
-  margin: 0.5vh;
+  margin: 1vh;
   justify-content: center;
 }
 .call-button {
@@ -63,4 +64,10 @@ body {
   background-color: rgb(207, 220, 236);
   height: 2rem;
   border: 0px;
+}
+
+@media screen and (min-width: 1200px) {
+  .content-container {
+    max-width: 1200px;
+  }
 }

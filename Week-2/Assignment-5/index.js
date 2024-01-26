@@ -6,7 +6,7 @@ function binarySearchPosition(numbers, target) {
   });
 
   //step2.binary search start=>二分逼近法?
-  let start = 0,
+  var start = 0,
     end = numbers.length - 1;
   while (start <= end) {
     let mid = Math.floor((start + end) / 2); //從中間開始逼近

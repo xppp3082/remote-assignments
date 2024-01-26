@@ -1,3 +1,8 @@
+const blkHaveGoodTime = document.querySelector("#banner");
+blkHaveGoodTime.addEventListener("click", () => {
+  blkHaveGoodTime.textContent = "Have a Good Time!";
+});
+
 const btnShowExtra = document.querySelector(".call-button");
 
 btnShowExtra.addEventListener("click", () => {

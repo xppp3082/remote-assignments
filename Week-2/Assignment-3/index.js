@@ -1,6 +1,6 @@
 function count(input) {
   // your code here
-  var output = {};
+  let output = {};
   for (let i = 0; i < input.length; i++) {
     if (!Object.keys(output).includes(input[i])) {
       let count = 1;

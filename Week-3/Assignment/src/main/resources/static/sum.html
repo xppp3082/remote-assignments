@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        //創建AJAX function提取後端API
+        function sendAJAX() {
+            let num = document.getElementById('myInput').value;
+            let xhr = new XMLHttpRequest();
+            let endPoint = 'http://localhost:3000/data?number='+num;
+            xhr.open('GET', endPoint,true);
+            console.log(num);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if(xhr.status===200){
+                        // window.location.href = endPoint;
+                        document.getElementById("final_ans").textContent="計算結果:"+xhr.responseText;//回傳後端API string
+                    }
+                }
+            }
+            console.log((endPoint));
+            xhr.send();
+        }
+    </script>
+</head>
+<body>
+<div>
+    <h2>請輸入計算值：</h2>
+    <p id="final_ans">計算結果:</p>
+    <input type="text" id="myInput" class="boxValue"><br><br>
+    <button type="button" onclick="sendAJAX()">Click Me!</button>
+</div>
+</body>
+</html>

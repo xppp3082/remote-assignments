@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Name</title>
+</head>
+<body>
+<!--th表示從Thymeleaf模板引擎中引入變數，此變數被springframework.ui.model所儲存-->
+<h1 th:text="${message}"></h1>
+
+<form action="/trackName" method="get">
+    <label for="name">Enter your name:</label>
+    <input type="text" id="name" name="name" required>
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>

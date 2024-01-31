@@ -1,4 +1,4 @@
-package com.example.Assignment;
+package com.example.assignment;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
@@ -30,21 +30,21 @@ public class CookieController {
     }
 
     @GetMapping("/trackName")
-    public String setCookie(@RequestParam(value = "name", required = false) String userName, HttpServletResponse response){
+    public String setCookie(@RequestParam(value = "name", required = false) String userName, HttpServletResponse response) {
         // 創造一個帶有User輸入值的Cookie
-        try{
+        try {
             String encodedUserName = Base64.getEncoder().encodeToString(userName.getBytes("UTF-8"));
             Cookie cookie = new Cookie("name", userName);
 
             // 設置過期時間，若無設置時間，其生命週期將持續到Session 過期為止
-            cookie.setMaxAge(7*24*60*60);
+            cookie.setMaxAge(7 * 24 * 60 * 60);
             // Add the cookie to the response
             response.addCookie(cookie);
 
             //return cookie.getName();
             //得到cookie後，重新導回/myName;
             return "redirect:/myName";
-        }catch(UnsupportedEncodingException e){
+        } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
             return "error";
         }

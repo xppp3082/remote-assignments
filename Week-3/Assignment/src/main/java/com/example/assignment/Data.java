@@ -1,4 +1,4 @@
-package com.example.Assignment;
+package com.example.assignment;
 
 
 import org.springframework.web.bind.annotation.*;
@@ -14,12 +14,12 @@ public class Data {
         if (number == null) {
             return "Lack of Parameter!";
         } else {
-            try{
+            try {
                 int endNum = Integer.parseInt(number);
                 for (int i = 0; i <= endNum; i++) {
                     output += i;
                 }
-            }catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 return "Wrong Parameter!";
             }
         }

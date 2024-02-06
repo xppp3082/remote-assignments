@@ -6,16 +6,46 @@ import com.example.assignment3.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Controller
 public class RegisterController {
     @Autowired
     private UserRepository userRepository;
+
+    @GetMapping("/getAllUsers")
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    @GetMapping("/getUser/{identity}")
+    public User getSingleUser(@PathVariable("identity") Integer id) {
+        return userRepository.findById(id).get();
+    }
+
+    @DeleteMapping("/remove/{id}")
+    public boolean deleteRow(@PathVariable("id") Integer id) {
+        if (!userRepository.findById(id).equals(Optional.empty())) {
+            userRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
+
+    @PutMapping("/update/{id}")
+    public User updateUser(@PathVariable("id") Integer id,
+                           @RequestBody Map<String, String> body) {
+        User currentUser = userRepository.findById(id).get();
+        currentUser.setEmail(body.get("email"));
+        currentUser.setPassword(body.get("password"));
+
+        userRepository.save(currentUser);
+        return currentUser;
+    }
 
     @GetMapping("/")
     public String home(Model model) {
@@ -25,9 +55,12 @@ public class RegisterController {
 
     @PostMapping("/signup")
     public String signUp(@ModelAttribute User user, Model model) {
-        if (!userRepository.findByEmail(user.getEmail()).isPresent()) {
+        if (userRepository.findByEmail(user.getEmail()).isEmpty() && !user.getEmail().isEmpty() && !user.getPassword().isEmpty()) {
             userRepository.save(user);
             model.addAttribute("message", "Signed up successfully!");
+            return "redirect:/member";
+        } else if (user.getEmail().isEmpty() || user.getPassword().isEmpty()) {
+            model.addAttribute("error", "Email or password can't be empty!");
             return "home";
         } else {
             model.addAttribute("error", "Email already registered.");

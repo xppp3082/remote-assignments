@@ -17,35 +17,6 @@ public class RegisterController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("/getAllUsers")
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
-    }
-
-    @GetMapping("/getUser/{identity}")
-    public User getSingleUser(@PathVariable("identity") Integer id) {
-        return userRepository.findById(id).get();
-    }
-
-    @DeleteMapping("/remove/{id}")
-    public boolean deleteRow(@PathVariable("id") Integer id) {
-        if (!userRepository.findById(id).equals(Optional.empty())) {
-            userRepository.deleteById(id);
-            return true;
-        }
-        return false;
-    }
-
-    @PutMapping("/update/{id}")
-    public User updateUser(@PathVariable("id") Integer id,
-                           @RequestBody Map<String, String> body) {
-        User currentUser = userRepository.findById(id).get();
-        currentUser.setEmail(body.get("email"));
-        currentUser.setPassword(body.get("password"));
-
-        userRepository.save(currentUser);
-        return currentUser;
-    }
 
     @GetMapping("/")
     public String home(Model model) {
